@@ -227,14 +227,14 @@ const AddReportForm = ({ currentItem, onClose, fetchReports }) => {
         try {
             console.log(formData)
             if (!currentItem) {
-                await API.post('/reports', formData, {
+                await API.post('/api/reports', formData, {
                     headers: {
                         'Content-Type': 'multipart/form-data'
                     }
                 });
             } else {
                 // PUT avec uniquement les champs modifiés (optionnel à implémenter)
-                await API.put(`/reports/${currentItem._id}`, formData, {
+                await API.put(`/api/reports/${currentItem._id}`, formData, {
                     headers: {
                         'Content-Type': 'multipart/form-data'
                     }

@@ -188,13 +188,13 @@ export default function AddParcelForm({ onClose, fetchParcels, currentItem }) {
 
         try {
             if (!currentItem) {
-                await API.post('/parcels', formDataToSend, {
+                await API.post('/api/parcels', formDataToSend, {
                     headers: {
                         'Content-Type': 'multipart/form-data',
                     },
                 });
             } else {
-                await API.put(`/parcels/${currentItem._id}`, formDataToSend, {
+                await API.put(`/api/parcels/${currentItem._id}`, formDataToSend, {
                     headers: {
                         'Content-Type': 'multipart/form-data',
                     },

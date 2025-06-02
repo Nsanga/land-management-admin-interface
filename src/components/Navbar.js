@@ -20,7 +20,7 @@ export default function Navbar() {
 
   const fetchUser = async () => {
     try {
-      const res = await API.get(`/users/${user.userInfo._id}`);
+      const res = await API.get(`/api/users/${user.userInfo._id}`);
       setUserData({
         firstName: res.data.firstName,
         lastName: res.data.lastName,
