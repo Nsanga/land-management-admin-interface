@@ -21,7 +21,7 @@ export default function TitlePage() {
 
     const fetchParcels = async () => {
         try {
-            const res = await API.get('/api/parcels');
+            const res = await API.get('/parcels');
             setParcels(res.data);
         } catch (err) {
             toast.error('Échec du chargement des parcelles');
@@ -34,7 +34,7 @@ export default function TitlePage() {
         setError(null);
         try {
             await fetchParcels();
-            const res = await API.get('/api/titles');
+            const res = await API.get('/titles');
             setTitles(res.data);
         } catch (err) {
             setError(err.response?.data?.message || 'Échec du chargement des titres');
@@ -56,7 +56,7 @@ export default function TitlePage() {
     const handleDelete = async (id, e) => {
         e.stopPropagation();
         try {
-            await API.delete(`/api/titles/${id}`);
+            await API.delete(`/titles/${id}`);
             await fetchTitles();
             toast.success('Titre supprimé avec succès');
         } catch (err) {

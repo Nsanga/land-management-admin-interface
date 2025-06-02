@@ -22,7 +22,7 @@ export default function ParcelsPage() {
         setLoading(true);
         setError(null);
         try {
-            const res = await API.get('/api/parcels');
+            const res = await API.get('/parcels');
             setParcels(res.data);
         } catch (err) {
             setError(err.response?.data?.message || 'Échec du chargement des parcelles');
@@ -39,7 +39,7 @@ export default function ParcelsPage() {
     const handleDelete = async (id, e) => {
         e.stopPropagation();
         try {
-            await API.delete(`/api/parcels/${id}`);
+            await API.delete(`/parcels/${id}`);
             await fetchParcels();
             toast.success('Parcelle supprimée avec succès');
         } catch (err) {

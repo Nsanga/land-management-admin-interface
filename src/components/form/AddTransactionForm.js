@@ -167,13 +167,13 @@ export default function AddTransactionForm({ onClose, fetchTransactions, parcels
 
         try {
             if (!currentItem) {
-                await API.post('/api/transactions', formDataToSend, {
+                await API.post('/transactions', formDataToSend, {
                     headers: {
                         'Content-Type': 'multipart/form-data',
                     },
                 });
             } else {
-                await API.put(`/api/transactions/${currentItem._id}`, formDataToSend, {
+                await API.put(`/transactions/${currentItem._id}`, formDataToSend, {
                     headers: {
                         'Content-Type': 'multipart/form-data',
                     },

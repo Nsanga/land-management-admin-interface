@@ -55,7 +55,7 @@ export default function Dashboard() {
         setLoading(true);
         setError(null);
         try {
-            const res = await API.get('/api/statistics');
+            const res = await API.get('/statistics');
             setStats(res.data);
         } catch (err) {
             setError("Erreur lors du chargement des statistiques.");

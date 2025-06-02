@@ -25,7 +25,7 @@ const EditProfilePage = () => {
 
     const fetchUser = async () => {
         try {
-            const res = await API.get(`/api/users/${user.userInfo._id}`);
+            const res = await API.get(`/users/${user.userInfo._id}`);
             setUserData({
                 firstName: res.data.firstName,
                 lastName: res.data.lastName,
@@ -54,7 +54,7 @@ const EditProfilePage = () => {
                 formData.append('avatar', userData.avatar); // 🆕
             }
 
-            await API.put(`/api/users/${user.userInfo._id}`, formData, {
+            await API.put(`/users/${user.userInfo._id}`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }

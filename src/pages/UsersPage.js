@@ -23,7 +23,7 @@ export default function UsersPage() {
         setLoading(true);
         setError(null);
         try {
-            const res = await API.get('/api/users');
+            const res = await API.get('/users');
             setUsers(res.data);
         } catch (err) {
             setError(err.response?.data?.message || 'Échec du chargement des utilisateurs');
@@ -40,7 +40,7 @@ export default function UsersPage() {
     const handleDelete = async (id, e) => {
         e.stopPropagation();
         try {
-            await API.delete(`/api/users/${id}`);
+            await API.delete(`/users/${id}`);
             await fetchUsers();
             toast.success('Utilisateur supprimé avec succès');
         } catch (err) {

@@ -16,9 +16,9 @@ export default function AddUserForm({ onClose, fetchUsers, currentItem }) {
         e.preventDefault();
         try {
             if (!currentItem) {
-                await API.post('/api/users', formData);
+                await API.post('/users', formData);
             } else {
-                await API.put(`/api/api/users/${currentItem._id}`, formData);
+                await API.put(`/users/${currentItem._id}`, formData);
             }
             // Changed from '/parcelles'
             setFormData({ firstName: '', lastName: '', email: '', phoneNumber: '', role: '', password: 'password' });

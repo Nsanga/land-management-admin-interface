@@ -190,13 +190,13 @@ export default function AddPropertyTitleForm({ onClose, fetchTitles, parcels, cu
 
         try {
             if (!currentItem) {
-                await API.post('/api/titles', formDataToSend, {
+                await API.post('/titles', formDataToSend, {
                     headers: {
                         'Content-Type': 'multipart/form-data',
                     },
                 });
             } else {
-                await API.put(`/api/titles/${currentItem._id}`, formDataToSend, {
+                await API.put(`/titles/${currentItem._id}`, formDataToSend, {
                     headers: {
                         'Content-Type': 'multipart/form-data',
                     },

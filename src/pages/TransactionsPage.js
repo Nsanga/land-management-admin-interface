@@ -22,7 +22,7 @@ export default function TransactionsPage() {
 
     const fetchParcels = async () => {
         try {
-            const res = await API.get('/api/parcels');
+            const res = await API.get('/parcels');
             setParcels(res.data);
         } catch (err) {
             toast.error('Échec du chargement des parcelles');
@@ -35,7 +35,7 @@ export default function TransactionsPage() {
         setError(null);
         try {
             await fetchParcels();
-            const res = await API.get('/api/transactions');
+            const res = await API.get('/transactions');
             setTransactions(res.data);
         } catch (err) {
             setError(err.response?.data?.message || 'Échec du chargement des transactions');
@@ -64,7 +64,7 @@ export default function TransactionsPage() {
     const handleDelete = async (id, e) => {
         e.stopPropagation();
         try {
-            await API.delete(`/api/transactions/${id}`);
+            await API.delete(`/transactions/${id}`);
             await fetchTransactions();
             toast.success('Transaction supprimée avec succès');
         } catch (err) {

@@ -22,7 +22,7 @@ export default function ReportsPage() {
     setLoading(true);
     setError(null);
     try {
-      const res = await API.get('/api/reports');
+      const res = await API.get('/reports');
       setReports(res.data);
     } catch (err) {
       setError(err.response?.data?.message || 'Échec du chargement des rapports');
@@ -44,7 +44,7 @@ export default function ReportsPage() {
   const handleDelete = async (id, e) => {
     e.stopPropagation();
     try {
-      await API.delete(`/api/reports/${id}`);
+      await API.delete(`/reports/${id}`);
       await fetchReports();
       toast.success('Rapport supprimé avec succès');
     } catch (err) {
@@ -59,7 +59,7 @@ export default function ReportsPage() {
 
   const handleDownload = async (id, reportNumber) => {
     try {
-      const response = await API.get(`/api/reports/${id}/download-full`, {
+      const response = await API.get(`/reports/${id}/download-full`, {
         responseType: 'blob'
       });
       const url = window.URL.createObjectURL(new Blob([response.data]));
