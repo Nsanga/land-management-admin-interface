@@ -4,8 +4,8 @@ import axios from 'axios';
 const isLocalhost = typeof window !== 'undefined' && window.location.hostname === 'localhost';
 
 const baseURL = isLocalhost
-  ? import.meta.env.VITE_API_URL
-  : import.meta.env.VITE_API_URL_PROD;
+  ? process.env.REACT_APP_API_URL
+  : process.env.REACT_APP_API_URL_PROD;
 
 const API = axios.create({ baseURL });
 
