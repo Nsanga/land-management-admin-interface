@@ -25,7 +25,7 @@ export function AuthProvider({ children }) {
         setUser(data);
         return { success: true };
       } else {
-        toast.error("Accès refusé !")
+        toast.error("Email ou mot de passe incorrect !")
       }
       // localStorage.setItem('user', JSON.stringify(data));
       // axios.defaults.headers.common['Authorization'] = `Bearer ${data.token}`;
