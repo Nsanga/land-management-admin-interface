@@ -3,6 +3,7 @@ import toast from "react-hot-toast";
 import API from "../../services/api";
 
 export default function AddUserForm({ onClose, fetchUsers, currentItem }) {
+    const [isLoading, setIsLoading] = useState(false);
     const [formData, setFormData] = useState({
         firstName: '',
         lastName: '',
@@ -14,6 +15,7 @@ export default function AddUserForm({ onClose, fetchUsers, currentItem }) {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setIsLoading(true);
         try {
             if (!currentItem) {
                 await API.post('/users', formData);
@@ -26,7 +28,10 @@ export default function AddUserForm({ onClose, fetchUsers, currentItem }) {
             toast.success(!currentItem ? 'Utilisateur ajoutée avec succès' : 'Utilisateur mis à jour avec succès');
             onClose();
         } catch (err) {
-            toast.error(err.response?.data?.message || 'Erreur lors de l\'ajout');
+            console.log("err:", err)
+            toast.error(err.response?.data?.msg || 'Erreur lors de l\'ajout');
+        } finally {
+            setIsLoading(false);
         }
     };
 
@@ -113,7 +118,15 @@ export default function AddUserForm({ onClose, fetchUsers, currentItem }) {
                     type="submit"
                     className="px-4 py-2 bg-blue-500 text-white rounded-md"
                 >
-                    Enregistrer
+                    {currentItem ? (
+                        <>
+                            {isLoading ? "Mise à jour en cours..." : "Mettre à jour"}
+                        </>
+                    ) : (
+                        <>
+                            {isLoading ? "Enregistrement en cours..." : "Enregistrer"}
+                        </>
+                    )}
                 </button>
             </div>
         </form>

@@ -7,7 +7,8 @@ import {
   FiFileText,
   FiChevronLeft,
   FiChevronRight,
-  FiUserCheck
+  FiUserCheck,
+  FiFile
 } from 'react-icons/fi';
 import { FaFileContract } from 'react-icons/fa';
 import { useAuth } from '../context/AuthContext';
@@ -19,6 +20,7 @@ export default function Sidebar({ isCollapsed, setIsCollapsed }) {
   // Menu complet
   const allMenuItems = [
     { path: '/dashboard', icon: <FiHome size={20} />, label: 'Tableau de bord' },
+    { path: '/requests', icon: <FiFile size={20} />, label: 'Demandes' },
     { path: '/parcels', icon: <FiMap size={20} />, label: 'Parcelles' },
     { path: '/titles', icon: <FaFileContract size={20} />, label: 'Titres de Propriété' },
     { path: '/transactions', icon: <FiDollarSign size={20} />, label: 'Transactions' },

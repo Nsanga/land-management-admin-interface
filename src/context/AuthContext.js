@@ -2,6 +2,7 @@ import { createContext, useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import API from '../services/api';
 import { useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
 
 const AuthContext = createContext();
 
@@ -17,10 +18,19 @@ export function AuthProvider({ children }) {
     try {
       const res = await API.post('/auth/login', { email, password });
       const data = res.data;
-      localStorage.setItem('user', JSON.stringify(data));
-      axios.defaults.headers.common['Authorization'] = `Bearer ${data.token}`;
-      setUser(data);
-      return { success: true };
+      console.log('data', data)
+      if (["admin", "agent_foncier"].includes(data.role)) {
+        localStorage.setItem('user', JSON.stringify(data));
+        axios.defaults.headers.common['Authorization'] = `Bearer ${data.token}`;
+        setUser(data);
+        return { success: true };
+      } else {
+        toast.error("Accès refusé !")
+      }
+      // localStorage.setItem('user', JSON.stringify(data));
+      // axios.defaults.headers.common['Authorization'] = `Bearer ${data.token}`;
+      // setUser(data);
+      // return { success: true };
     } catch (error) {
       // Retourner le message d'erreur de l'API ou un message par défaut
       const errorMessage = error.response?.data?.message || "Une erreur est survenue lors de la connexion";

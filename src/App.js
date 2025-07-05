@@ -13,6 +13,7 @@ import Sidebar from './components/Sidebar';
 import TitlePage from './pages/TitlePage';
 import { useState } from 'react';
 import ProfilePage from './pages/ProfilePage';
+import RequestsPage from './pages/RequestsPage';
 
 function ProtectedRoutes() {
   const [isCollapsed, setIsCollapsed] = useState(false);
@@ -28,6 +29,7 @@ function ProtectedRoutes() {
       <main className="p-4 mt-16">
         <Routes>
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/requests" element={<RequestsPage />} />
           <Route path="/parcels" element={<ParcelsPage />} />
           <Route path="/titles" element={<TitlePage />} />
           <Route path="/transactions" element={<TransactionsPage />} />
