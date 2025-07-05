@@ -4,8 +4,10 @@ import { FiTrash2, FiEdit, FiPlus, FiRefreshCw, FiFileText } from 'react-icons/f
 import API from '../services/api';
 import toast from 'react-hot-toast';
 import Modal from '../components/modal/Modal';
+import { useAuth } from '../context/AuthContext';
 
 export default function RequestsPage() {
+    const { user } = useAuth();
     const [requests, setRequests] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -23,7 +25,9 @@ export default function RequestsPage() {
         setLoading(true);
         setError(null);
         try {
-            const res = await API.get('/requests/all');
+            const user = JSON.parse(localStorage.getItem('user'));
+            const agentId = user?.userInfo?._id || user?.userInfo?._id;
+            const res = await API.get(`/requests/by-agent/${agentId}`);
             setRequests(res.data);
         } catch (err) {
             setError(err.response?.data?.message || 'Échec du chargement des titres');
@@ -34,6 +38,7 @@ export default function RequestsPage() {
     };
 
     useEffect(() => {
+        console.log(JSON.parse(localStorage.getItem('user')))
         fetchRequests();
     }, []);
 
