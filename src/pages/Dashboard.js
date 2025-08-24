@@ -79,6 +79,11 @@ export default function Dashboard() {
             citoyen: <FiUsers className="text-2xl" />
         };
 
+        const lastUserCount =
+            stats.monthlyStats?.users && stats.monthlyStats.users.length > 0
+                ? stats.monthlyStats.users[stats.monthlyStats.users.length - 1].count
+                : 0;
+
         return (
             <motion.div
                 variants={container}
@@ -101,11 +106,11 @@ export default function Dashboard() {
                         </div>
                     </div>
                     <div className="mt-4 text-xs font-medium opacity-80">
-                        +{stats.monthlyStats.users[stats.monthlyStats.users.length - 1]?.count || 0} ce mois
+                        +{lastUserCount} ce mois
                     </div>
                 </motion.div>
 
-                {stats.roles.map((r, index) => (
+                {stats.roles?.map((r, index) => (
                     <motion.div
                         key={index}
                         variants={item}
@@ -132,8 +137,8 @@ export default function Dashboard() {
 
     const renderUserChart = () => {
         if (!stats) return null;
-        const labels = stats.monthlyStats.users.map((item) => item.month);
-        const data = stats.monthlyStats.users.map((item) => item.count);
+        const labels = stats.monthlyStats?.users && stats.monthlyStats.users.map((item) => item.month);
+        const data = stats.monthlyStats?.users && stats.monthlyStats.users.map((item) => item.count);
 
         return (
             <motion.div
@@ -254,7 +259,7 @@ export default function Dashboard() {
                 label: 'Rapport',
                 count: stats.totals.reports,
                 icon: <FiFileText className="text-2xl" />,
-                gradient:  'from-amber-500 to-orange-600',
+                gradient: 'from-amber-500 to-orange-600',
                 change: stats.monthlyStats.reports[stats.monthlyStats.reports.length - 1]?.count || 0
             }
         ];
