@@ -4,8 +4,9 @@ import AddUserForm from '../form/AddUserForm';
 import AddTransactionForm from '../form/AddTransactionForm';
 import AddPropertyTitleForm from '../form/AddPropertyTitleForm';
 import AddReportForm from '../form/AddReportForm';
+import UpdateRequestForm from '../form/UpdateRequestForm';
 
-export default function Modal({ isOpen, onClose, modalType, fetchParcels, fetchUsers, fetchTransactions, fetchTitles, fetchReports, parcels, reports, currentItem }) {
+export default function Modal({ isOpen, onClose, modalType, fetchParcels, fetchUsers, fetchTransactions, fetchTitles, fetchReports, fetchRequests, parcels, reports, requests, currentItem }) {
   if (!isOpen) return null;
 
   const renderForm = () => {
@@ -20,6 +21,8 @@ export default function Modal({ isOpen, onClose, modalType, fetchParcels, fetchU
         return <AddPropertyTitleForm fetchTitles={fetchTitles} parcels={parcels} onClose={onClose} currentItem={currentItem} />;
       case 'report':
         return <AddReportForm fetchReports={fetchReports} reports={reports} onClose={onClose} currentItem={currentItem} />;
+        case 'request':
+        return <UpdateRequestForm fetchRequests={fetchRequests} requests={requests} onClose={onClose} currentItem={currentItem} />;
       default:
         return <AddParcelForm fetchParcels={fetchParcels} onClose={onClose} currentItem={currentItem} />;
     }

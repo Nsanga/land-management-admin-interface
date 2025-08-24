@@ -297,7 +297,7 @@ export default function RequestsPage() {
                 <Modal
                     isOpen={isModalOpen}
                     onClose={() => setIsModalOpen(false)}
-                    modalType="title"
+                    modalType="request"
                     fetchRequests={fetchRequests}
                     currentItem={currentItem}
                 />

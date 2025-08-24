@@ -75,43 +75,43 @@ export default function AddPropertyTitleForm({ onClose, fetchTitles, parcels, cu
 
     const handleRemovePreviewFile = (field, index) => {
         let fieldFiles = formData[field];
-      
+
         // Normaliser en tableau (utile si c'est un seul fichier ou une string)
         const normalizedFiles = Array.isArray(fieldFiles)
-          ? fieldFiles
-          : fieldFiles
-            ? [fieldFiles]
-            : [];
-      
+            ? fieldFiles
+            : fieldFiles
+                ? [fieldFiles]
+                : [];
+
         const removedFile = normalizedFiles[index];
-      
+
         const updatedFiles = normalizedFiles.filter((_, i) => i !== index);
-      
+
         // Pour les champs single-file, rétablir à null si aucun fichier
         const valueToSet = field === 'autresDocuments' ? updatedFiles : updatedFiles[0] || null;
-      
+
         setFormData(prev => ({
-          ...prev,
-          [field]: valueToSet,
+            ...prev,
+            [field]: valueToSet,
         }));
-      
+
         // Enregistrer l'URL à supprimer uniquement si c'est une string
         if (typeof removedFile === 'string') {
-          switch (field) {
-            case 'copieTitre':
-              setCopieTitreToDelete(removedFile);
-              break;
-            case 'actesNotaries':
-              setActesNotariesToDelete(removedFile);
-              break;
-            case 'autresDocuments':
-              setAutresDocumentsToDelete(prev => [...prev, removedFile]);
-              break;
-            default:
-              break;
-          }
+            switch (field) {
+                case 'copieTitre':
+                    setCopieTitreToDelete(removedFile);
+                    break;
+                case 'actesNotaries':
+                    setActesNotariesToDelete(removedFile);
+                    break;
+                case 'autresDocuments':
+                    setAutresDocumentsToDelete(prev => [...prev, removedFile]);
+                    break;
+                default:
+                    break;
+            }
         }
-      };  
+    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -289,7 +289,9 @@ export default function AddPropertyTitleForm({ onClose, fetchTitles, parcels, cu
                 ...prev,
                 // Étape 1: Informations sur le titre
                 numeroTitre: currentItem.numeroTitre || '',
-                dateEmission: currentItem.dateEmission.split('T')[0] || new Date().toISOString().split('T')[0],
+                dateEmission: currentItem.dateEmission
+                    ? new Date(currentItem.dateEmission).toISOString().split("T")[0]
+                    : new Date().toISOString().split("T")[0],
                 typeTitre: currentItem.typeTitre || 'foncier',
 
                 // Étape 2: Informations propriétaire
